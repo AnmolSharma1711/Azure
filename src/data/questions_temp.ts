@@ -13,7 +13,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -29,7 +29,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'C',
     explanation: '',
-    category: 'AI Workloads and Considerations',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -61,7 +61,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'C',
     explanation: '',
-    category: 'Computer Vision Workloads',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -77,7 +77,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'D',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -93,7 +93,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -109,7 +109,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -125,7 +125,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'Conversational AI Workloads',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -141,7 +141,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'C',
     explanation: '',
-    category: 'Computer Vision Workloads',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -157,7 +157,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'Computer Vision Workloads',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -189,7 +189,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -205,7 +205,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'C',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -221,7 +221,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'C',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -237,7 +237,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -253,7 +253,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'C',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -269,7 +269,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Workloads and Considerations',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -285,7 +285,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -301,7 +301,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -317,7 +317,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'C',
     explanation: '',
-    category: 'Speech Services',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -333,7 +333,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'C',
     explanation: '',
-    category: 'Speech Services',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -365,7 +365,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'Conversational AI Workloads',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -413,7 +413,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'Conversational AI Workloads',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -429,7 +429,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -445,7 +445,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Workloads and Considerations',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -461,7 +461,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'C',
     explanation: '',
-    category: 'Knowledge Mining',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -477,7 +477,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Workloads and Considerations',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -493,7 +493,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -541,7 +541,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Workloads and Considerations',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -557,7 +557,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'Knowledge Mining',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -573,7 +573,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -589,7 +589,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'C',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -605,7 +605,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'C',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -621,7 +621,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -637,7 +637,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -653,7 +653,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -669,7 +669,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -685,7 +685,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -701,7 +701,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'C',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -717,7 +717,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -733,7 +733,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -749,7 +749,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -765,7 +765,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'C',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -781,7 +781,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'Speech Services',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -797,7 +797,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -829,7 +829,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -845,7 +845,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -877,7 +877,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -893,7 +893,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'C',
     explanation: '',
-    category: 'Conversational AI Workloads',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -909,7 +909,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'Conversational AI Workloads',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -925,7 +925,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Workloads and Considerations',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -941,7 +941,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -973,7 +973,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Workloads and Considerations',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -989,7 +989,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1005,7 +1005,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'Speech Services',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1021,7 +1021,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1053,7 +1053,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'C',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1069,7 +1069,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'AI Workloads and Considerations',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1085,7 +1085,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1117,7 +1117,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'Conversational AI Workloads',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1133,7 +1133,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1149,7 +1149,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1165,7 +1165,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Workloads and Considerations',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1181,7 +1181,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'C',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1197,7 +1197,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'Knowledge Mining',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1213,7 +1213,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'C',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1229,7 +1229,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'C',
     explanation: '',
-    category: 'AI Workloads and Considerations',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1245,7 +1245,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1261,7 +1261,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1277,7 +1277,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1293,7 +1293,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Workloads and Considerations',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1309,7 +1309,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'Computer Vision Workloads',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1341,7 +1341,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1357,7 +1357,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Workloads and Considerations',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1373,7 +1373,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'Knowledge Mining',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1389,7 +1389,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1405,7 +1405,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'AI Workloads and Considerations',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1421,7 +1421,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'Computer Vision Workloads',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1437,7 +1437,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'Speech Services',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1453,7 +1453,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'C',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1469,7 +1469,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1485,7 +1485,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Workloads and Considerations',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1517,7 +1517,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1533,7 +1533,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1549,7 +1549,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1565,7 +1565,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1581,7 +1581,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'Machine Learning Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1597,7 +1597,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'Conversational AI Workloads',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
