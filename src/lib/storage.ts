@@ -8,10 +8,12 @@ console.log('[Storage] Import verification:', {
   predefinedCount: predefinedQuestions ? predefinedQuestions.length : 0,
   dragDropQuestionsLoaded: Array.isArray(dragDropQuestions),
   dragDropCount: dragDropQuestions ? dragDropQuestions.length : 0,
-  predefinedAI900: predefinedQuestions ? predefinedQuestions.filter(q => q.exam_type === 'AI-900').length : 0,
-  predefinedAZ900: predefinedQuestions ? predefinedQuestions.filter(q => q.exam_type === 'AZ-900').length : 0,
-  dragDropAI900: dragDropQuestions ? dragDropQuestions.filter(q => q.exam_type === 'AI-900').length : 0,
-  dragDropAZ900: dragDropQuestions ? dragDropQuestions.filter(q => q.exam_type === 'AZ-900').length : 0
+  predefinedAI900: predefinedQuestions ? predefinedQuestions.filter(q => q && q.exam_type === 'AI-900').length : 0,
+  predefinedAZ900: predefinedQuestions ? predefinedQuestions.filter(q => q && q.exam_type === 'AZ-900').length : 0,
+  dragDropAI900: dragDropQuestions ? dragDropQuestions.filter(q => q && q.exam_type === 'AI-900').length : 0,
+  dragDropAZ900: dragDropQuestions ? dragDropQuestions.filter(q => q && q.exam_type === 'AZ-900').length : 0,
+  predefinedInvalid: predefinedQuestions ? predefinedQuestions.filter(q => !q || !q.exam_type).length : 0,
+  dragDropInvalid: dragDropQuestions ? dragDropQuestions.filter(q => !q || !q.exam_type).length : 0
 });
 
 // Local storage key
@@ -140,7 +142,34 @@ export class QuestionStorage {
 
   static async getQuestionsByExamType(examType: 'AZ-900' | 'AI-900'): Promise<Question[]> {
     const questions = await this.getQuestions();
-    const filtered = questions.filter(q => q.exam_type === examType);
+    
+    console.log(`[Storage] getQuestionsByExamType DEBUG:`, {
+      examType,
+      totalQuestions: questions.length,
+      firstFewQuestions: questions.slice(0, 3).map(q => ({
+        id: q?.id || 'NO_ID',
+        exam_type: q?.exam_type || 'UNDEFINED',
+        hasExamType: !!q?.exam_type,
+        isObject: typeof q === 'object' && q !== null
+      }))
+    });
+    
+    // Validate questions and filter out any with undefined exam_type
+    const validQuestions = questions.filter(q => q && q.exam_type);
+    const invalidCount = questions.length - validQuestions.length;
+    
+    if (invalidCount > 0) {
+      console.warn(`[Storage] Found ${invalidCount} questions with undefined exam_type, clearing localStorage`);
+      // Clear localStorage to force refresh from static data
+      localStorage.removeItem(QUESTIONS_STORAGE_KEY);
+      // Get fresh questions and validate them too
+      const freshQuestions = [...predefinedQuestions, ...dragDropQuestions];
+      const validFreshQuestions = freshQuestions.filter(q => q && q.exam_type);
+      this.saveQuestions(validFreshQuestions);
+      return validFreshQuestions.filter(q => q && q.exam_type && q.exam_type === examType);
+    }
+    
+    const filtered = validQuestions.filter(q => q && q.exam_type && q.exam_type === examType);
     
     console.log(`[Storage] getQuestionsByExamType(${examType}):`, {
       totalQuestions: questions.length,
@@ -177,7 +206,19 @@ export class QuestionStorage {
 
   static getQuestionsByExamTypeSync(examType: 'AZ-900' | 'AI-900'): Question[] {
     const questions = this.getQuestionsSync();
-    const filtered = questions.filter(q => q.exam_type === examType);
+    
+    // Validate questions and filter out any with undefined exam_type
+    const validQuestions = questions.filter(q => q && q.exam_type);
+    const invalidCount = questions.length - validQuestions.length;
+    
+    if (invalidCount > 0) {
+      console.warn(`[Storage] Sync: Found ${invalidCount} questions with undefined exam_type`);
+      // Return fresh static data
+      const freshQuestions = [...predefinedQuestions, ...dragDropQuestions];
+      return freshQuestions.filter(q => q && q.exam_type && q.exam_type === examType);
+    }
+    
+    const filtered = validQuestions.filter(q => q && q.exam_type && q.exam_type === examType);
     
     console.log(`[Storage] getQuestionsByExamTypeSync(${examType}):`, {
       totalQuestions: questions.length,
@@ -291,5 +332,14 @@ export class QuestionStorage {
     localStorage.removeItem(QUESTIONS_STORAGE_KEY);
     // Reinitialize with predefined questions
     await this.initializeQuestions();
+  }
+
+  // Force refresh localStorage with current static data
+  static forceRefreshQuestions(): void {
+    console.log('[Storage] Force refreshing questions from static data...');
+    localStorage.removeItem(QUESTIONS_STORAGE_KEY);
+    const allQuestions = [...predefinedQuestions, ...dragDropQuestions];
+    this.saveQuestions(allQuestions);
+    console.log(`[Storage] Refreshed with ${allQuestions.length} questions`);
   }
 }

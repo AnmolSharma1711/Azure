@@ -2406,4 +2406,3 @@ export const predefinedQuestions: Question[] = [
   }
 ];
 
-
