@@ -146,8 +146,31 @@ export class QuestionStorage {
       totalQuestions: questions.length,
       filteredQuestions: filtered.length,
       examTypes: [...new Set(questions.map(q => q.exam_type))],
-      sampleFiltered: filtered.slice(0, 3).map(q => ({ id: q.id, type: q.type, exam_type: q.exam_type }))
+      sampleFiltered: filtered.slice(0, 3).map(q => ({ 
+        id: q.id, 
+        type: q.type, 
+        exam_type: q.exam_type,
+        correct_answer: q.correct_answer,
+        options: q.options?.slice(0, 2) // First 2 options for debugging
+      }))
     });
+    
+    // Special debugging for AI-900
+    if (examType === 'AI-900') {
+      console.log('[Storage] AI-900 SPECIFIC DEBUG:', {
+        ai900Questions: filtered.length,
+        ai900Ids: filtered.map(q => q.id),
+        ai900CorrectAnswers: filtered.map(q => ({ id: q.id, correct_answer: q.correct_answer })),
+        sampleAI900Question: filtered[0] ? {
+          id: filtered[0].id,
+          question: filtered[0].question.substring(0, 100) + '...',
+          options: filtered[0].options,
+          correct_answer: filtered[0].correct_answer,
+          type: filtered[0].type,
+          exam_type: filtered[0].exam_type
+        } : 'No AI-900 questions found'
+      });
+    }
     
     return filtered;
   }
