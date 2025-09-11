@@ -1,21 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { BookOpen, Play, Database, BarChart3, Move3D } from 'lucide-react';
+import { BookOpen, Play } from 'lucide-react';
 import { QuestionStorage } from '../lib/storage';
 
 interface QuizSetupProps {
   onStartQuiz: (examType: 'AZ-900' | 'AI-900', questionCount: number) => void;
-  onShowDragDropManager?: () => void;
 }
 
-export function QuizSetup({ onStartQuiz, onShowDragDropManager }: QuizSetupProps) {
+export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
   const [examType, setExamType] = useState<'AZ-900' | 'AI-900'>('AZ-900');
   const [questionCount, setQuestionCount] = useState(10);
-  const [questionCounts, setQuestionCounts] = useState({
-    az900: 0,
-    ai900: 0,
-    total: 0,
-    dragDrop: { total: 0, az900: 0, ai900: 0 }
-  });
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -23,16 +16,6 @@ export function QuizSetup({ onStartQuiz, onShowDragDropManager }: QuizSetupProps
       try {
         // Initialize questions (this will load CSV data on first run)
         await QuestionStorage.initializeQuestions();
-        
-        // Get question counts
-        const questionCounts = QuestionStorage.getAllQuestionCounts();
-        
-        setQuestionCounts({
-          az900: questionCounts.az900,
-          ai900: questionCounts.ai900,
-          total: questionCounts.total,
-          dragDrop: questionCounts.dragDrop
-        });
       } catch (error) {
         console.error('Error initializing questions:', error);
       } finally {
@@ -68,17 +51,9 @@ export function QuizSetup({ onStartQuiz, onShowDragDropManager }: QuizSetupProps
         <p className="text-xl text-gray-600 mb-8">
           Test your knowledge and prepare for Azure certification exams
         </p>
-        <div className="flex items-center justify-center space-x-6 text-sm text-gray-600">
-          <div className="flex items-center space-x-2">
-            <BarChart3 className="w-4 h-4" />
-            <span>{questionCounts.total} Total Questions</span>
-          </div>
-          <div>AZ-900: {questionCounts.az900} questions</div>
-          <div>AI-900: {questionCounts.ai900} questions</div>
-        </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="max-w-2xl mx-auto">
         {/* Quiz Setup */}
         <div className="bg-white rounded-lg shadow-lg p-8">
           <h2 className="text-2xl font-semibold mb-6 flex items-center space-x-2">
@@ -102,9 +77,7 @@ export function QuizSetup({ onStartQuiz, onShowDragDropManager }: QuizSetupProps
                 >
                   <div className="font-semibold">AZ-900</div>
                   <div className="text-sm text-gray-600">
-                    Azure Fundamentals ({questionCounts.az900} questions)
-                    <br />
-                    <span className="text-xs">Includes {questionCounts.dragDrop.az900} drag-drop questions</span>
+                    Azure Fundamentals
                   </div>
                 </button>
                 <button
@@ -117,9 +90,7 @@ export function QuizSetup({ onStartQuiz, onShowDragDropManager }: QuizSetupProps
                 >
                   <div className="font-semibold">AI-900</div>
                   <div className="text-sm text-gray-600">
-                    AI Fundamentals ({questionCounts.ai900} questions)
-                    <br />
-                    <span className="text-xs">Includes {questionCounts.dragDrop.ai900} drag-drop questions</span>
+                    AI Fundamentals
                   </div>
                 </button>
               </div>
@@ -148,50 +119,6 @@ export function QuizSetup({ onStartQuiz, onShowDragDropManager }: QuizSetupProps
               <Play className="w-5 h-5" />
               <span>Start Quiz</span>
             </button>
-          </div>
-        </div>
-
-        {/* Question Database Info */}
-        <div className="bg-white rounded-lg shadow-lg p-8">
-          <h2 className="text-2xl font-semibold mb-6 flex items-center space-x-2">
-            <Database className="w-6 h-6 text-blue-600" />
-            <span>Question Database</span>
-          </h2>
-          
-          <div className="space-y-6">
-            <div className="text-gray-600">
-              Complete database of Azure certification questions with multiple question types.
-            </div>
-            
-            <div className="bg-blue-50 p-4 rounded-lg">
-              <h4 className="font-medium text-blue-800 mb-2">Current Database:</h4>
-              <div className="text-sm text-blue-700">
-                <div>• {questionCounts.total} total questions loaded</div>
-                <div>• AZ-900: {questionCounts.az900} questions ({questionCounts.dragDrop.az900} drag-drop)</div>
-                <div>• AI-900: {questionCounts.ai900} questions ({questionCounts.dragDrop.ai900} drag-drop)</div>
-                <div>• Multiple question types supported (MCQ + Drag-Drop)</div>
-              </div>
-            </div>
-
-            {onShowDragDropManager && (
-              <button
-                onClick={onShowDragDropManager}
-                className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 px-6 rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
-              >
-                <Move3D className="w-5 h-5" />
-                <span>View Drag-Drop Questions</span>
-              </button>
-            )}
-
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <h4 className="font-medium text-gray-700 mb-2">Features:</h4>
-              <div className="text-sm text-gray-600 space-y-1">
-                <div>• Multiple choice questions from CSV database</div>
-                <div>• Interactive drag-and-drop sequence questions</div>
-                <div>• Real-world scenarios and case studies</div>
-                <div>• Categorized by topics and difficulty levels</div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

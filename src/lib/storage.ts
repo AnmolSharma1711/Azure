@@ -1,6 +1,6 @@
 import { Question } from '../types/quiz';
 import { predefinedQuestions } from '../data/questions';
-import { DragDropStorage } from './dragDropStorage';
+import { dragDropQuestions } from '../data/dragDropQuestions';
 
 // Local storage key
 const QUESTIONS_STORAGE_KEY = 'azure_quiz_questions';
@@ -9,14 +9,12 @@ export class QuestionStorage {
   static async initializeQuestions(): Promise<void> {
     const stored = localStorage.getItem(QUESTIONS_STORAGE_KEY);
     if (!stored) {
-      // Initialize with predefined questions on first load
-      console.log('Initializing with predefined questions...');
-      this.saveQuestions(predefinedQuestions);
-      console.log(`Initialized ${predefinedQuestions.length} predefined questions`);
+      // Combine all question types on first load
+      console.log('Initializing with all question types...');
+      const allQuestions = [...predefinedQuestions, ...dragDropQuestions];
+      this.saveQuestions(allQuestions);
+      console.log(`Initialized ${allQuestions.length} total questions (${predefinedQuestions.length} MCQ + ${dragDropQuestions.length} drag-drop)`);
     }
-    
-    // Also initialize drag-drop questions
-    DragDropStorage.initializeDragDropQuestions();
   }
 
   static async getQuestions(): Promise<Question[]> {
@@ -68,7 +66,6 @@ export class QuestionStorage {
   // Get all questions including drag-drop questions
   static getAllQuestionsSync(): Question[] {
     const mcqQuestions = this.getQuestionsSync();
-    const dragDropQuestions = DragDropStorage.getDragDropQuestions();
     return [...mcqQuestions, ...dragDropQuestions];
   }
 
@@ -82,13 +79,30 @@ export class QuestionStorage {
     const mcqAz900 = mcqQuestions.filter(q => q.exam_type === 'AZ-900').length;
     const mcqAi900 = mcqQuestions.filter(q => q.exam_type === 'AI-900').length;
     
-    const dragDropCounts = DragDropStorage.getDragDropQuestionCounts();
+    const dragDropAz900 = dragDropQuestions.filter(q => q.exam_type === 'AZ-900').length;
+    const dragDropAi900 = dragDropQuestions.filter(q => q.exam_type === 'AI-900').length;
     
     return {
-      total: mcqQuestions.length + dragDropCounts.total,
-      az900: mcqAz900 + dragDropCounts.az900,
-      ai900: mcqAi900 + dragDropCounts.ai900,
-      dragDrop: dragDropCounts
+      total: mcqQuestions.length + dragDropQuestions.length,
+      az900: mcqAz900 + dragDropAz900,
+      ai900: mcqAi900 + dragDropAi900,
+      dragDrop: {
+        total: dragDropQuestions.length,
+        az900: dragDropAz900,
+        ai900: dragDropAi900
+      }
+    };
+  }
+
+  static getQuestionCounts(): { total: number; az900: number; ai900: number } {
+    const questions = this.getQuestionsSync();
+    const az900Count = questions.filter(q => q.exam_type === 'AZ-900').length;
+    const ai900Count = questions.filter(q => q.exam_type === 'AI-900').length;
+    
+    return {
+      total: questions.length,
+      az900: az900Count,
+      ai900: ai900Count
     };
   }
 
@@ -104,8 +118,8 @@ export class QuestionStorage {
     
     if (includeDragDrop) {
       const mcqQuestions = await this.getQuestionsByExamType(examType);
-      const dragDropQuestions = DragDropStorage.getDragDropQuestionsByExamType(examType);
-      allQuestions = [...mcqQuestions, ...dragDropQuestions];
+      const examDragDropQuestions = dragDropQuestions.filter(q => q.exam_type === examType);
+      allQuestions = [...mcqQuestions, ...examDragDropQuestions];
     } else {
       allQuestions = await this.getQuestionsByExamType(examType);
     }

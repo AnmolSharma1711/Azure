@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { QuizSetup } from './components/QuizSetup';
 import { QuizInterface } from './components/QuizInterface';
 import { QuizResults } from './components/QuizResults';
-import { DragDropManager } from './components/DragDropManager';
 import { useQuiz } from './hooks/useQuiz';
 
-type AppState = 'setup' | 'dragdrop' | 'quiz' | 'results';
+type AppState = 'setup' | 'quiz' | 'results';
 
 function App() {
   const [appState, setAppState] = useState<AppState>('setup');
@@ -77,18 +76,7 @@ function App() {
   if (appState === 'setup') {
     return (
       <div className="min-h-screen bg-gray-100">
-        <QuizSetup
-          onStartQuiz={handleStartQuiz}
-          onShowDragDropManager={() => setAppState('dragdrop')}
-        />
-      </div>
-    );
-  }
-
-  if (appState === 'dragdrop') {
-    return (
-      <div className="min-h-screen bg-gray-100">
-        <DragDropManager onBack={() => setAppState('setup')} />
+        <QuizSetup onStartQuiz={handleStartQuiz} />
       </div>
     );
   }
