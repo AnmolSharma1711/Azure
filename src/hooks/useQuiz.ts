@@ -107,10 +107,28 @@ export function useQuiz(examType: 'AZ-900' | 'AI-900', questionCount: number = 1
         return userAnswer === question.correct_answer;
       case 'drag-drop':
         // For drag-drop, compare arrays
-        return JSON.stringify(userAnswer) === JSON.stringify(question.correct_answer);
+        // Convert sparse user answer to compact array for comparison
+        const compactUserAnswer = Array.isArray(userAnswer) 
+          ? userAnswer.filter(item => item !== undefined && item !== null)
+          : [];
+        const correctAnswer = Array.isArray(question.correct_answer) 
+          ? question.correct_answer 
+          : [];
+        return JSON.stringify(compactUserAnswer) === JSON.stringify(correctAnswer);
       case 'matching':
         // For matching, compare objects
         return JSON.stringify(userAnswer) === JSON.stringify(question.correct_answer);
+      case 'true-false-table':
+        // For true-false-table, compare the user answers with correct answers
+        try {
+          const correctAnswers = typeof question.correct_answer === 'string' 
+            ? JSON.parse(question.correct_answer) 
+            : question.correct_answer;
+          return JSON.stringify(userAnswer) === JSON.stringify(correctAnswers);
+        } catch (error) {
+          console.error('Error parsing true-false-table correct answer:', error);
+          return false;
+        }
       default:
         return false;
     }

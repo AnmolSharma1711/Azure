@@ -2,6 +2,7 @@ import React from 'react';
 import { Question } from '../types/quiz';
 import { MCQQuestion } from './questions/MCQQuestion';
 import { DragDropQuestion } from './questions/DragDropQuestion';
+import { TrueFalseTableQuestion } from './questions/TrueFalseTableQuestion';
 import { ChevronRight, Clock, Target } from 'lucide-react';
 
 interface QuizInterfaceProps {
@@ -47,6 +48,14 @@ export function QuizInterface({
             onAnswer={onAnswer}
           />
         );
+      case 'true-false-table':
+        return (
+          <TrueFalseTableQuestion
+            question={question}
+            userAnswer={userAnswer}
+            onAnswer={onAnswer}
+          />
+        );
       default:
         return <div>Unsupported question type</div>;
     }
@@ -54,7 +63,19 @@ export function QuizInterface({
 
   const isAnswered = () => {
     if (question.type === 'mcq') return !!userAnswer;
-    if (question.type === 'drag-drop') return userAnswer?.length > 0;
+    if (question.type === 'drag-drop') {
+      // Check if any items have been placed (handle sparse arrays)
+      return Array.isArray(userAnswer) && userAnswer.some(item => item !== undefined && item !== null);
+    }
+    if (question.type === 'true-false-table') {
+      // Check if all statements have been answered
+      const statements = question.options || [];
+      if (!userAnswer || typeof userAnswer !== 'object') return false;
+      return statements.every((_, index) => 
+        userAnswer.hasOwnProperty(index.toString()) && 
+        typeof userAnswer[index.toString()] === 'boolean'
+      );
+    }
     return false;
   };
 

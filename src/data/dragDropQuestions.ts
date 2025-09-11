@@ -198,5 +198,51 @@ export const dragDropQuestions: Question[] = [
     category: 'Cost Management',
     difficulty: 'medium',
     exam_type: 'AZ-900'
+  },
+  {
+    id: 'ai900_tf_1',
+    question: 'Evaluate the following statements about Azure Cognitive Services:',
+    type: 'true-false-table',
+    options: [
+      'Azure Cognitive Services provides pre-built AI models that can be used without machine learning expertise',
+      'Custom Vision requires you to write code for image classification',
+      'Text Analytics API can detect sentiment in text',
+      'Speech Service only supports English language',
+      'Form Recognizer can extract data from structured documents like invoices'
+    ],
+    correct_answer: JSON.stringify({
+      "0": true,   // Azure Cognitive Services provides pre-built AI models - TRUE
+      "1": false,  // Custom Vision requires you to write code - FALSE (it's no-code)
+      "2": true,   // Text Analytics can detect sentiment - TRUE
+      "3": false,  // Speech Service only supports English - FALSE (supports many languages)
+      "4": true    // Form Recognizer can extract data from documents - TRUE
+    }),
+    explanation: 'Azure Cognitive Services are designed to be easy-to-use pre-built AI capabilities. Custom Vision is a no-code solution, Text Analytics includes sentiment analysis, Speech Service supports multiple languages, and Form Recognizer excels at document data extraction.',
+    category: 'AI Services',
+    difficulty: 'medium',
+    exam_type: 'AI-900'
+  },
+  {
+    id: 'az900_tf_1',
+    question: 'Evaluate the following statements about Azure Storage Services:',
+    type: 'true-false-table',
+    options: [
+      'Azure Blob Storage is optimized for storing large amounts of unstructured data',
+      'Azure File Storage cannot be accessed via SMB protocol',
+      'Table Storage is a NoSQL key-value store',
+      'Queue Storage is used for storing relational data',
+      'Disk Storage provides persistent storage for Azure Virtual Machines'
+    ],
+    correct_answer: JSON.stringify({
+      "0": true,   // Blob Storage for unstructured data - TRUE
+      "1": false,  // File Storage cannot use SMB - FALSE (it supports SMB)
+      "2": true,   // Table Storage is NoSQL - TRUE
+      "3": false,  // Queue Storage for relational data - FALSE (it's for messaging)
+      "4": true    // Disk Storage for VMs - TRUE
+    }),
+    explanation: 'Azure Blob Storage handles unstructured data like images and documents. File Storage supports SMB protocol for network file shares. Table Storage is indeed a NoSQL service. Queue Storage is for message queuing, not relational data. Disk Storage provides persistent disks for VMs.',
+    category: 'Storage Services',
+    difficulty: 'medium',
+    exam_type: 'AZ-900'
   }
 ];

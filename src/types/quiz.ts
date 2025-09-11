@@ -1,7 +1,7 @@
 export interface Question {
   id: string;
   question: string;
-  type: 'mcq' | 'drag-drop' | 'matching';
+  type: 'mcq' | 'drag-drop' | 'matching' | 'true-false-table';
   options?: string[];
   correct_answer: string | string[];
   explanation?: string;
