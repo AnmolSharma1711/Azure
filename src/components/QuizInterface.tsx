@@ -85,25 +85,25 @@ export function QuizInterface({
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-2">
-            <Target className="w-5 h-5 text-blue-600" />
-            <span className="font-medium text-gray-700">
+            <Target className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+            <span className="font-medium text-gray-700 dark:text-gray-300 transition-colors duration-300">
               Question {questionIndex + 1} of {totalQuestions}
             </span>
           </div>
-          <div className="flex items-center space-x-2 text-gray-600">
+          <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 transition-colors duration-300">
             <Clock className="w-4 h-4" />
             <span className="text-sm">{formatTime(timeElapsed)}</span>
           </div>
         </div>
         
         <div className="flex items-center space-x-3">
-          <span className="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full font-medium">
+          <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 text-sm rounded-full font-medium transition-colors duration-300">
             {question.exam_type}
           </span>
-          <span className={`px-3 py-1 text-sm rounded-full font-medium ${
-            question.difficulty === 'easy' ? 'bg-green-100 text-green-800' :
-            question.difficulty === 'medium' ? 'bg-yellow-100 text-yellow-800' :
-            'bg-red-100 text-red-800'
+          <span className={`px-3 py-1 text-sm rounded-full font-medium transition-colors duration-300 ${
+            question.difficulty === 'easy' ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300' :
+            question.difficulty === 'medium' ? 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300' :
+            'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300'
           }`}>
             {question.difficulty}
           </span>
@@ -113,27 +113,27 @@ export function QuizInterface({
       {/* Progress Bar */}
       <div className="mb-8">
         <div className="flex justify-between items-center mb-2">
-          <span className="text-sm text-gray-600">Progress</span>
-          <span className="text-sm text-gray-600">
+          <span className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">Progress</span>
+          <span className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
             {Math.round(((questionIndex + 1) / totalQuestions) * 100)}%
           </span>
         </div>
-        <div className="w-full bg-gray-200 rounded-full h-2">
+        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 transition-colors duration-300">
           <div
-            className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+            className="bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-500 dark:to-indigo-500 h-2 rounded-full transition-all duration-300"
             style={{ width: `${((questionIndex + 1) / totalQuestions) * 100}%` }}
           />
         </div>
       </div>
 
       {/* Question */}
-      <div className="bg-white rounded-lg shadow-lg p-8 mb-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-2xl p-8 mb-6 transition-all duration-300 border border-gray-200 dark:border-gray-700">
         {renderQuestion()}
       </div>
 
       {/* Category */}
       <div className="text-center mb-6">
-        <span className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm">
+        <span className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm transition-colors duration-300">
           Category: {question.category}
         </span>
       </div>
@@ -145,8 +145,8 @@ export function QuizInterface({
           disabled={!isAnswered()}
           className={`px-8 py-3 rounded-lg font-semibold flex items-center space-x-2 mx-auto transition-all duration-200 ${
             isAnswered()
-              ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl'
-              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              ? 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 dark:from-blue-500 dark:to-indigo-500 dark:hover:from-blue-600 dark:hover:to-indigo-600 text-white shadow-lg hover:shadow-xl transform hover:scale-105'
+              : 'bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed'
           }`}
         >
           <span>{questionIndex + 1 === totalQuestions ? 'Finish Quiz' : 'Next Question'}</span>

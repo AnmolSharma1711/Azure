@@ -187,11 +187,11 @@ export function DragDropQuestion({ question, userAnswer = [], onAnswer }: DragDr
 
   return (
     <div className="space-y-6 drag-drop-container">{/* Added drag-drop-container class */}
-      <h3 className="text-xl font-semibold text-gray-800 mb-6">
+      <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-6 transition-colors duration-300">
         {question.question}
       </h3>
       
-      <div className="text-sm text-gray-600 mb-4">
+      <div className="text-sm text-gray-600 dark:text-gray-400 mb-4 transition-colors duration-300">
         <span className="hidden md:block">
           Drag items from the available list to any numbered slot below. You can drop items in any order you want.
         </span>
@@ -202,14 +202,14 @@ export function DragDropQuestion({ question, userAnswer = [], onAnswer }: DragDr
 
       {/* Available Items */}
       <div className="space-y-2">
-        <h4 className="font-medium text-gray-700">Available Items:</h4>
+        <h4 className="font-medium text-gray-700 dark:text-gray-300 transition-colors duration-300">Available Items:</h4>
         <div 
-          className="flex flex-wrap gap-2 min-h-[60px] p-3 border-2 border-dashed border-blue-300 rounded-lg bg-blue-50 drop-zone available-zone"
+          className="flex flex-wrap gap-2 min-h-[60px] p-3 border-2 border-dashed border-blue-300 dark:border-blue-600 rounded-lg bg-blue-50 dark:bg-blue-900/20 drop-zone available-zone transition-colors duration-300"
           onDragOver={handleDragOver}
           onDrop={handleDropToAvailable}
         >
           {availableItems.length === 0 && (
-            <div className="text-blue-500 text-sm italic w-full text-center py-2">
+            <div className="text-blue-500 dark:text-blue-400 text-sm italic w-full text-center py-2 transition-colors duration-300">
               All items have been placed
             </div>
           )}
@@ -221,7 +221,7 @@ export function DragDropQuestion({ question, userAnswer = [], onAnswer }: DragDr
               onTouchStart={(e) => handleTouchStart(e, item)}
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
-              className={`px-3 py-2 bg-blue-100 text-blue-800 rounded-lg cursor-move hover:bg-blue-200 transition-colors select-none border border-blue-300 touch-item ${
+              className={`px-3 py-2 bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 rounded-lg cursor-move hover:bg-blue-200 dark:hover:bg-blue-700 transition-colors select-none border border-blue-300 dark:border-blue-600 touch-item ${
                 isDragging && draggedItem === item ? 'opacity-50' : ''
               }`}
               style={{ userSelect: 'none', touchAction: 'none' }}
@@ -234,14 +234,14 @@ export function DragDropQuestion({ question, userAnswer = [], onAnswer }: DragDr
 
       {/* Numbered Drop Slots */}
       <div className="space-y-2">
-        <h4 className="font-medium text-gray-700">Drop Zone (arrange in correct order):</h4>
+        <h4 className="font-medium text-gray-700 dark:text-gray-300 transition-colors duration-300">Drop Zone (arrange in correct order):</h4>
         <div className="space-y-3">
           {slots.map((item, index) => (
             <div
               key={index}
               className="flex items-center space-x-3"
             >
-              <div className="flex-shrink-0 w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center font-semibold text-gray-700">
+              <div className="flex-shrink-0 w-8 h-8 bg-gray-200 dark:bg-gray-600 rounded-full flex items-center justify-center font-semibold text-gray-700 dark:text-gray-300 transition-colors duration-300">
                 {index + 1}
               </div>
               <div
@@ -249,8 +249,8 @@ export function DragDropQuestion({ question, userAnswer = [], onAnswer }: DragDr
                 onDrop={(e) => handleDropToSlot(e, index)}
                 className={`flex-1 min-h-[50px] border-2 border-dashed rounded-lg p-3 transition-all duration-200 drop-zone ${
                   item 
-                    ? 'border-green-400 bg-green-50' 
-                    : 'border-gray-300 bg-gray-50 hover:border-blue-400 hover:bg-blue-50'
+                    ? 'border-green-400 dark:border-green-500 bg-green-50 dark:bg-green-900/20' 
+                    : 'border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 hover:border-blue-400 dark:hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20'
                 }`}
                 data-slot-index={index}
               >
@@ -262,7 +262,7 @@ export function DragDropQuestion({ question, userAnswer = [], onAnswer }: DragDr
                       onTouchStart={(e) => handleTouchStart(e, item, index)}
                       onTouchMove={handleTouchMove}
                       onTouchEnd={handleTouchEnd}
-                      className={`text-green-800 cursor-move select-none bg-green-100 px-2 py-1 rounded border border-green-300 touch-item ${
+                      className={`text-green-800 dark:text-green-200 cursor-move select-none bg-green-100 dark:bg-green-800 px-2 py-1 rounded border border-green-300 dark:border-green-600 touch-item transition-colors duration-300 ${
                         isDragging && draggedItem === item ? 'opacity-50' : ''
                       }`}
                       style={{ userSelect: 'none', touchAction: 'none' }}
@@ -271,14 +271,14 @@ export function DragDropQuestion({ question, userAnswer = [], onAnswer }: DragDr
                     </span>
                     <button
                       onClick={() => removeFromSlot(index)}
-                      className="text-red-600 hover:text-red-800 transition-colors ml-2 text-xl"
+                      className="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 transition-colors ml-2 text-xl"
                       title="Remove item"
                     >
                       ×
                     </button>
                   </div>
                 ) : (
-                  <div className="text-gray-500 text-center text-sm">
+                  <div className="text-gray-500 dark:text-gray-400 text-center text-sm transition-colors duration-300">
                     Drop item here
                   </div>
                 )}
@@ -289,7 +289,7 @@ export function DragDropQuestion({ question, userAnswer = [], onAnswer }: DragDr
       </div>
       
       {slots.filter(item => item !== null).length > 0 && (
-        <div className="text-sm text-gray-600 mt-4">
+        <div className="text-sm text-gray-600 dark:text-gray-400 mt-4 transition-colors duration-300">
           <strong>Items placed:</strong> {slots.filter(item => item !== null).length} of {items.length}
         </div>
       )}
