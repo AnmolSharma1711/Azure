@@ -269,6 +269,38 @@ export function useQuiz(examType: 'AZ-900' | 'AI-900', questionCount: number = 1
           const userStr = String(userAnswer).trim();
           const correctStr = String(question.correct_answer).trim();
           
+          // Check for letter-only answers (from CSV import)
+          let mcqResult = false;
+          
+          if (correctStr.length === 1 && /^[A-D]$/i.test(correctStr)) {
+            // CSV format: correct answer is just a letter (A, B, C, D)
+            // Extract letter from user answer (e.g., "B. Custom Vision" -> "B")
+            const userLetter = userStr.charAt(0).toUpperCase();
+            const correctLetter = correctStr.toUpperCase();
+            mcqResult = userLetter === correctLetter;
+            
+            if (isAI900) {
+              logger.log(`${logPrefix} AI-900 LETTER-BASED comparison:`, {
+                userStr: userStr,
+                userLetter: userLetter,
+                correctStr: correctStr,
+                correctLetter: correctLetter,
+                result: mcqResult
+              });
+            }
+          } else {
+            // Full text format: exact match
+            mcqResult = userStr === correctStr;
+            
+            if (isAI900) {
+              logger.log(`${logPrefix} AI-900 FULL-TEXT comparison:`, {
+                userStr: userStr,
+                correctStr: correctStr,
+                result: mcqResult
+              });
+            }
+          }
+          
           if (isAI900) {
             logger.log(`${logPrefix} AI-900 MCQ comparison details:`, {
               userStr: userStr,
@@ -276,19 +308,12 @@ export function useQuiz(examType: 'AZ-900' | 'AI-900', questionCount: number = 1
               userStrLength: userStr.length,
               correctStrLength: correctStr.length,
               exactMatch: userStr === correctStr,
-              caseInsensitiveMatch: userStr.toLowerCase() === correctStr.toLowerCase(),
-              charByCharComparison: userStr.split('').map((char, i) => ({
-                index: i,
-                userChar: char,
-                correctChar: correctStr[i] || 'undefined',
-                charCode: char.charCodeAt(0),
-                correctCharCode: correctStr[i] ? correctStr[i].charCodeAt(0) : 'undefined',
-                match: char === (correctStr[i] || 'undefined')
-              }))
+              letterBasedMatch: correctStr.length === 1 ? userStr.charAt(0).toUpperCase() === correctStr.toUpperCase() : false,
+              finalResult: mcqResult,
+              detectionMethod: correctStr.length === 1 ? 'letter-based' : 'full-text'
             });
           }
           
-          const mcqResult = userStr === correctStr;
           logger.log(`${logPrefix} MCQ ${question.id}:`, { 
             userAnswerStr: userStr, 
             correctStr: correctStr, 
