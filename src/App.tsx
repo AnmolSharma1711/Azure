@@ -5,18 +5,21 @@ import { QuizResults } from './components/QuizResults';
 import { ThemeToggle } from './components/ThemeToggle';
 import { useQuiz } from './hooks/useQuiz';
 import { ThemeProvider } from './contexts/ThemeContext';
+import { QuizConfig } from './types/quiz';
 
 type AppState = 'setup' | 'quiz' | 'results';
 
 function App() {
   const [appState, setAppState] = useState<AppState>('setup');
-  const [examType, setExamType] = useState<'AZ-900' | 'AI-900'>('AZ-900');
-  const [questionCount, setQuestionCount] = useState(10);
+  const [quizConfig, setQuizConfig] = useState<QuizConfig>({
+    mode: 'examination',
+    examType: 'AZ-900',
+    questionCount: 10,
+  });
   const [timeElapsed, setTimeElapsed] = useState(0);
 
   const { quizState, loading, error, answerQuestion, nextQuestion, completeQuiz, restartQuiz } = useQuiz(
-    appState === 'quiz' ? examType : 'AZ-900',
-    appState === 'quiz' ? questionCount : 0
+    appState === 'quiz' ? quizConfig : { ...quizConfig, questionCount: 0 }
   );
 
   // Timer effect
@@ -30,9 +33,8 @@ function App() {
     return () => clearInterval(interval);
   }, [appState, quizState.startTime, quizState.isCompleted]);
 
-  const handleStartQuiz = (selectedExamType: 'AZ-900' | 'AI-900', selectedQuestionCount: number) => {
-    setExamType(selectedExamType);
-    setQuestionCount(selectedQuestionCount);
+  const handleStartQuiz = (config: QuizConfig) => {
+    setQuizConfig(config);
     setAppState('quiz');
   };
 
@@ -122,7 +124,7 @@ function App() {
           <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg max-w-md w-full mx-4 text-center transition-colors duration-300">
             <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">No Questions Found</h2>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
-              No questions are available for {examType}. Please try reloading the application.
+              No questions are available for {quizConfig.examType}. Please try reloading the application.
             </p>
             <button
               onClick={() => window.location.reload()}
@@ -157,6 +159,7 @@ function App() {
           onAnswer={handleAnswer}
           onNext={handleNext}
           timeElapsed={timeElapsed}
+          config={quizConfig}
         />
       </div>
     );

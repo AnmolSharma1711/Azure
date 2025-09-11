@@ -1,9 +1,9 @@
 import React from 'react';
-import { Question } from '../types/quiz';
+import { Question, QuizConfig } from '../types/quiz';
 import { MCQQuestion } from './questions/MCQQuestion';
 import { DragDropQuestion } from './questions/DragDropQuestion';
 import { TrueFalseTableQuestion } from './questions/TrueFalseTableQuestion';
-import { ChevronRight, Clock, Target } from 'lucide-react';
+import { ChevronRight, Clock, Target, GraduationCap } from 'lucide-react';
 
 interface QuizInterfaceProps {
   question: Question;
@@ -13,6 +13,7 @@ interface QuizInterfaceProps {
   onAnswer: (answer: any) => void;
   onNext: () => void;
   timeElapsed: number;
+  config?: QuizConfig;
 }
 
 export function QuizInterface({
@@ -23,11 +24,21 @@ export function QuizInterface({
   onAnswer,
   onNext,
   timeElapsed,
+  config,
 }: QuizInterfaceProps) {
   const formatTime = (ms: number) => {
     const seconds = Math.floor(ms / 1000);
     const minutes = Math.floor(seconds / 60);
     return `${minutes}:${(seconds % 60).toString().padStart(2, '0')}`;
+  };
+
+  const getDifficultyColor = (difficulty: string) => {
+    switch (difficulty) {
+      case 'easy': return 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/30';
+      case 'medium': return 'text-yellow-600 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-900/30';
+      case 'hard': return 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/30';
+      default: return 'text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-900/30';
+    }
   };
 
   const renderQuestion = () => {
@@ -97,16 +108,27 @@ export function QuizInterface({
         </div>
         
         <div className="flex items-center space-x-3">
+          {/* Quiz Mode Indicator */}
+          {config && (
+            <span className={`px-3 py-1 text-sm rounded-full font-medium transition-colors duration-300 ${
+              config.mode === 'practice' 
+                ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
+                : 'bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300'
+            }`}>
+              {config.mode === 'practice' ? '🎯 Practice' : '🎓 Exam'}
+              {config.mode === 'practice' && config.difficulty && ` (${config.difficulty})`}
+            </span>
+          )}
+          
           <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 text-sm rounded-full font-medium transition-colors duration-300">
             {question.exam_type}
           </span>
-          <span className={`px-3 py-1 text-sm rounded-full font-medium transition-colors duration-300 ${
-            question.difficulty === 'easy' ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300' :
-            question.difficulty === 'medium' ? 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300' :
-            'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300'
-          }`}>
-            {question.difficulty}
-          </span>
+          {/* Only show difficulty badge in Examination mode since Practice mode already shows it */}
+          {config?.mode === 'examination' && (
+            <span className={`px-3 py-1 text-sm rounded-full font-medium transition-colors duration-300 ${getDifficultyColor(question.difficulty)}`}>
+              {question.difficulty}
+            </span>
+          )}
         </div>
       </div>
 

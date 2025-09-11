@@ -1,42 +1,76 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Question, QuizState, QuizResult } from '../types/quiz';
+import { Question, QuizState, QuizResult, QuizConfig } from '../types/quiz';
 import { QuestionStorage } from '../lib/storage';
 import { logger, debugStore } from '../lib/logger';
 
-export function useQuiz(examType: 'AZ-900' | 'AI-900', questionCount: number = 10) {
+export function useQuiz(config: QuizConfig) {
   const [quizState, setQuizState] = useState<QuizState>({
     questions: [],
     currentQuestionIndex: 0,
     answers: {},
     startTime: 0,
     isCompleted: false,
+    config,
   });
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchRandomQuestions = useCallback(async () => {
+  const fetchQuestions = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
       
-      logger.log('Fetching questions for:', { examType, questionCount });
+      logger.log('Fetching questions with config:', config);
       
       // Don't fetch questions if questionCount is 0 or negative
-      if (questionCount <= 0) {
+      if (config.questionCount <= 0) {
         logger.log('Skipping question fetch - questionCount is 0 or negative');
         setLoading(false);
         return;
       }
       
-      // Use the new method that includes drag-drop questions
-      const questions = await QuestionStorage.getRandomAllQuestions(examType, questionCount, true);
+      let questions: Question[] = [];
       
-      logger.log('Fetched questions:', questions.length);
-      debugStore.set('questions', questions.map(q => ({ id: q.id, type: q.type, exam_type: q.exam_type })));
+      if (config.mode === 'practice' && config.difficulty) {
+        // Practice Mode: Get questions by specific difficulty
+        questions = await QuestionStorage.getQuestionsByDifficulty(
+          config.examType, 
+          config.difficulty, 
+          config.questionCount
+        );
+        logger.log('Practice mode - fetched questions by difficulty:', {
+          difficulty: config.difficulty,
+          count: questions.length
+        });
+      } else {
+        // Examination Mode: Get mixed difficulty questions
+        questions = await QuestionStorage.getRandomMixedQuestions(
+          config.examType, 
+          config.questionCount
+        );
+        logger.log('Examination mode - fetched mixed questions:', {
+          count: questions.length,
+          difficulties: questions.reduce((acc, q) => {
+            acc[q.difficulty] = (acc[q.difficulty] || 0) + 1;
+            return acc;
+          }, {} as Record<string, number>)
+        });
+      }
+      
+      debugStore.set('questions', questions.map(q => ({ 
+        id: q.id, 
+        type: q.type, 
+        exam_type: q.exam_type, 
+        difficulty: q.difficulty,
+        category: q.category 
+      })));
       
       if (questions.length === 0) {
-        throw new Error(`No questions found for ${examType}. Please check that questions are properly loaded.`);
+        const modeText = config.mode === 'practice' 
+          ? `${config.difficulty} difficulty` 
+          : 'mixed difficulty';
+        throw new Error(`No questions found for ${config.examType} with ${modeText}. Please check that questions are properly loaded.`);
       }
       
       setQuizState(prev => ({
@@ -44,6 +78,7 @@ export function useQuiz(examType: 'AZ-900' | 'AI-900', questionCount: number = 1
         questions,
         startTime: Date.now(),
         answers: {}, // Reset answers
+        config,
       }));
     } catch (err) {
       logger.error('Error fetching questions:', err);
@@ -51,11 +86,11 @@ export function useQuiz(examType: 'AZ-900' | 'AI-900', questionCount: number = 1
     } finally {
       setLoading(false);
     }
-  }, [examType, questionCount]);
+  }, [config]);
 
   useEffect(() => {
-    fetchRandomQuestions();
-  }, [fetchRandomQuestions]);
+    fetchQuestions();
+  }, [fetchQuestions]);
 
   const answerQuestion = (questionId: string, answer: any) => {
     logger.log('Answer submitted:', { questionId, answer, answerType: typeof answer });
@@ -410,8 +445,9 @@ export function useQuiz(examType: 'AZ-900' | 'AI-900', questionCount: number = 1
       answers: {},
       startTime: 0,
       isCompleted: false,
+      config: quizState.config,
     });
-    fetchRandomQuestions();
+    fetchQuestions();
   };
 
   return {

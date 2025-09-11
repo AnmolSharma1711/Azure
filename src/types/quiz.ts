@@ -11,6 +11,15 @@ export interface Question {
   created_at?: string;
 }
 
+export type QuizMode = 'practice' | 'examination';
+
+export interface QuizConfig {
+  mode: QuizMode;
+  examType: 'AZ-900' | 'AI-900';
+  questionCount: number;
+  difficulty?: 'easy' | 'medium' | 'hard'; // Only for practice mode
+}
+
 export interface QuizResult {
   totalQuestions: number;
   correctAnswers: number;
@@ -27,4 +36,5 @@ export interface QuizState {
   startTime: number;
   isCompleted: boolean;
   result?: QuizResult;
+  config?: QuizConfig;
 }

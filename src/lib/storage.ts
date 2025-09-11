@@ -282,6 +282,66 @@ export class QuestionStorage {
     return shuffled.slice(0, Math.min(count, shuffled.length));
   }
 
+  // Get questions by difficulty level (Practice Mode)
+  static async getQuestionsByDifficulty(examType: 'AZ-900' | 'AI-900', difficulty: 'easy' | 'medium' | 'hard', count: number): Promise<Question[]> {
+    const allQuestions = await this.getQuestions();
+    
+    // Filter by exam type and difficulty
+    const filteredQuestions = allQuestions.filter(q => 
+      q && q.exam_type === examType && q.difficulty === difficulty
+    );
+    
+    console.log(`[Storage] getQuestionsByDifficulty(${examType}, ${difficulty}):`, {
+      totalQuestions: allQuestions.length,
+      filteredQuestions: filteredQuestions.length,
+      requestedCount: count,
+      availableQuestions: filteredQuestions.map(q => ({
+        id: q.id,
+        difficulty: q.difficulty,
+        category: q.category
+      }))
+    });
+    
+    if (filteredQuestions.length === 0) {
+      console.warn(`[Storage] No questions found for ${examType} with difficulty ${difficulty}`);
+      return [];
+    }
+    
+    // Shuffle and return requested count
+    const shuffled = [...filteredQuestions].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, Math.min(count, shuffled.length));
+  }
+
+  // Get mixed difficulty questions (Examination Mode)
+  static async getRandomMixedQuestions(examType: 'AZ-900' | 'AI-900', count: number): Promise<Question[]> {
+    const allQuestions = await this.getQuestions();
+    
+    // Filter by exam type only
+    const examQuestions = allQuestions.filter(q => 
+      q && q.exam_type === examType
+    );
+    
+    console.log(`[Storage] getRandomMixedQuestions(${examType}):`, {
+      totalQuestions: allQuestions.length,
+      examQuestions: examQuestions.length,
+      requestedCount: count,
+      difficultyBreakdown: {
+        easy: examQuestions.filter(q => q.difficulty === 'easy').length,
+        medium: examQuestions.filter(q => q.difficulty === 'medium').length,
+        hard: examQuestions.filter(q => q.difficulty === 'hard').length
+      }
+    });
+    
+    if (examQuestions.length === 0) {
+      console.warn(`[Storage] No questions found for ${examType}`);
+      return [];
+    }
+    
+    // Shuffle and return requested count
+    const shuffled = [...examQuestions].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, Math.min(count, shuffled.length));
+  }
+
   // Get random questions including drag-drop questions
   static async getRandomAllQuestions(examType: 'AZ-900' | 'AI-900', count: number, includeDragDrop: boolean = true): Promise<Question[]> {
     let allQuestions: Question[];

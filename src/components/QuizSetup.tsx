@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { BookOpen, Play } from 'lucide-react';
+import { BookOpen, Play, Target, GraduationCap } from 'lucide-react';
 import { QuestionStorage } from '../lib/storage';
+import { QuizConfig } from '../types/quiz';
 
 interface QuizSetupProps {
-  onStartQuiz: (examType: 'AZ-900' | 'AI-900', questionCount: number) => void;
+  onStartQuiz: (config: QuizConfig) => void;
 }
 
 export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
+  const [mode, setMode] = useState<'practice' | 'examination'>('examination');
   const [examType, setExamType] = useState<'AZ-900' | 'AI-900'>('AZ-900');
   const [questionCount, setQuestionCount] = useState(10);
+  const [difficulty, setDifficulty] = useState<'easy' | 'medium' | 'hard'>('easy');
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -25,6 +28,16 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
 
     initializeQuestions();
   }, []);
+
+  const handleStartQuiz = () => {
+    const config: QuizConfig = {
+      mode,
+      examType,
+      questionCount,
+      ...(mode === 'practice' && { difficulty })
+    };
+    onStartQuiz(config);
+  };
   
   if (isLoading) {
     return (
@@ -62,6 +75,48 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
           </h2>
           
           <div className="space-y-6">
+            {/* Quiz Mode Selection */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3 transition-colors duration-300">
+                Select Quiz Mode
+              </label>
+              <div className="grid grid-cols-2 gap-3">
+                <button
+                  onClick={() => setMode('practice')}
+                  className={`p-4 rounded-lg border-2 text-left transition-all duration-200 ${
+                    mode === 'practice'
+                      ? 'border-green-500 bg-green-50 dark:bg-green-900/30 text-green-800 dark:text-green-300'
+                      : 'border-gray-200 dark:border-gray-600 hover:border-green-300 dark:hover:border-green-500 text-gray-800 dark:text-gray-200'
+                  }`}
+                >
+                  <div className="flex items-center space-x-2 mb-2">
+                    <Target className="w-5 h-5" />
+                    <div className="font-semibold">Practice Mode</div>
+                  </div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">
+                    Select difficulty level for focused practice
+                  </div>
+                </button>
+                <button
+                  onClick={() => setMode('examination')}
+                  className={`p-4 rounded-lg border-2 text-left transition-all duration-200 ${
+                    mode === 'examination'
+                      ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300'
+                      : 'border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-500 text-gray-800 dark:text-gray-200'
+                  }`}
+                >
+                  <div className="flex items-center space-x-2 mb-2">
+                    <GraduationCap className="w-5 h-5" />
+                    <div className="font-semibold">Examination Mode</div>
+                  </div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">
+                    Mixed difficulty questions like real exam
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            {/* Exam Type Selection */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3 transition-colors duration-300">
                 Select Exam Type
@@ -96,6 +151,57 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
               </div>
             </div>
 
+            {/* Difficulty Selection (Only for Practice Mode) */}
+            {mode === 'practice' && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3 transition-colors duration-300">
+                  Select Difficulty Level
+                </label>
+                <div className="grid grid-cols-3 gap-3">
+                  <button
+                    onClick={() => setDifficulty('easy')}
+                    className={`p-4 rounded-lg border-2 text-center transition-all duration-200 ${
+                      difficulty === 'easy'
+                        ? 'border-green-500 bg-green-50 dark:bg-green-900/30 text-green-800 dark:text-green-300'
+                        : 'border-gray-200 dark:border-gray-600 hover:border-green-300 dark:hover:border-green-500 text-gray-800 dark:text-gray-200'
+                    }`}
+                  >
+                    <div className="font-semibold">Easy</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                      Basic concepts
+                    </div>
+                  </button>
+                  <button
+                    onClick={() => setDifficulty('medium')}
+                    className={`p-4 rounded-lg border-2 text-center transition-all duration-200 ${
+                      difficulty === 'medium'
+                        ? 'border-yellow-500 bg-yellow-50 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300'
+                        : 'border-gray-200 dark:border-gray-600 hover:border-yellow-300 dark:hover:border-yellow-500 text-gray-800 dark:text-gray-200'
+                    }`}
+                  >
+                    <div className="font-semibold">Medium</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                      Intermediate
+                    </div>
+                  </button>
+                  <button
+                    onClick={() => setDifficulty('hard')}
+                    className={`p-4 rounded-lg border-2 text-center transition-all duration-200 ${
+                      difficulty === 'hard'
+                        ? 'border-red-500 bg-red-50 dark:bg-red-900/30 text-red-800 dark:text-red-300'
+                        : 'border-gray-200 dark:border-gray-600 hover:border-red-300 dark:hover:border-red-500 text-gray-800 dark:text-gray-200'
+                    }`}
+                  >
+                    <div className="font-semibold">Hard</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                      Advanced
+                    </div>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Number of Questions */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3 transition-colors duration-300">
                 Number of Questions
@@ -113,11 +219,15 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
             </div>
 
             <button
-              onClick={() => onStartQuiz(examType, questionCount)}
-              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 dark:from-blue-500 dark:to-indigo-500 dark:hover:from-blue-600 dark:hover:to-indigo-600 text-white py-3 px-6 rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center justify-center space-x-2"
+              onClick={handleStartQuiz}
+              className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center justify-center space-x-2 ${
+                mode === 'practice'
+                  ? 'bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 dark:from-green-500 dark:to-emerald-500 dark:hover:from-green-600 dark:hover:to-emerald-600'
+                  : 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 dark:from-purple-500 dark:to-indigo-500 dark:hover:from-purple-600 dark:hover:to-indigo-600'
+              } text-white`}
             >
-              <Play className="w-5 h-5" />
-              <span>Start Quiz</span>
+              {mode === 'practice' ? <Target className="w-5 h-5" /> : <GraduationCap className="w-5 h-5" />}
+              <span>Start {mode === 'practice' ? 'Practice' : 'Examination'}</span>
             </button>
           </div>
         </div>
