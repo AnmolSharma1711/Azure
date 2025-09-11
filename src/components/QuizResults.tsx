@@ -184,12 +184,12 @@ export function QuizResults({ result, onRestart }: QuizResultsProps) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {feedback.strengths.length > 0 && (
             <div>
-              <h3 className="font-semibold text-green-700 mb-3">Strong Areas 💪</h3>
+              <h3 className="font-semibold text-green-700 dark:text-green-400 mb-3 transition-colors duration-300">Strong Areas 💪</h3>
               <ul className="space-y-2">
                 {feedback.strengths.map((strength, index) => (
                   <li key={index} className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full" />
-                    <span className="text-gray-700">{strength}</span>
+                    <div className="w-2 h-2 bg-green-500 dark:bg-green-400 rounded-full" />
+                    <span className="text-gray-700 dark:text-black transition-colors duration-300">{strength}</span>
                   </li>
                 ))}
               </ul>
@@ -203,7 +203,7 @@ export function QuizResults({ result, onRestart }: QuizResultsProps) {
                 {feedback.improvements.map((improvement, index) => (
                   <li key={index} className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-red-500 dark:bg-red-400 rounded-full" />
-                    <span className="text-gray-700 dark:text-gray-300 transition-colors duration-300">{improvement}</span>
+                    <span className="text-gray-700 dark:text-black transition-colors duration-300">{improvement}</span>
                   </li>
                 ))}
               </ul>
@@ -217,7 +217,7 @@ export function QuizResults({ result, onRestart }: QuizResultsProps) {
             {feedback.recommendations.map((recommendation, index) => (
               <li key={index} className="flex items-start space-x-2">
                 <div className="w-2 h-2 bg-blue-500 dark:bg-blue-400 rounded-full mt-2 flex-shrink-0" />
-                <span className="text-gray-700 dark:text-gray-300 transition-colors duration-300">{recommendation}</span>
+                <span className="text-gray-700 dark:text-black transition-colors duration-300">{recommendation}</span>
               </li>
             ))}
           </ul>
