@@ -58,14 +58,26 @@ export function useQuiz(examType: 'AZ-900' | 'AI-900', questionCount: number = 1
   }, [fetchRandomQuestions]);
 
   const answerQuestion = (questionId: string, answer: any) => {
-    logger.log('Answer submitted:', { questionId, answer });
-    setQuizState(prev => ({
-      ...prev,
-      answers: {
+    logger.log('Answer submitted:', { questionId, answer, answerType: typeof answer });
+    
+    setQuizState(prev => {
+      const newAnswers = {
         ...prev.answers,
         [questionId]: answer,
-      },
-    }));
+      };
+      
+      logger.log('Updated answers state:', {
+        questionId,
+        newAnswer: answer,
+        totalAnswers: Object.keys(newAnswers).length,
+        allAnswers: newAnswers
+      });
+      
+      return {
+        ...prev,
+        answers: newAnswers,
+      };
+    });
   };
 
   const nextQuestion = () => {
@@ -78,10 +90,28 @@ export function useQuiz(examType: 'AZ-900' | 'AI-900', questionCount: number = 1
   const completeQuiz = () => {
     // Use a callback to ensure we get the latest state
     setQuizState(prev => {
+      logger.log('completeQuiz called with state:', {
+        questionsLength: prev.questions.length,
+        answersCount: Object.keys(prev.answers).length,
+        currentIndex: prev.currentQuestionIndex,
+        answers: prev.answers
+      });
+      
       const result = calculateResultWithState(prev);
       logger.log('Completing quiz with result:', result);
       debugStore.set('final_result', result);
       debugStore.set('final_answers', prev.answers);
+      debugStore.set('final_questions', prev.questions.map(q => ({ id: q.id, type: q.type, correct_answer: q.correct_answer })));
+      
+      // Additional verification
+      if (result.score === 0 && Object.keys(prev.answers).length > 0) {
+        logger.error('Zero score detected despite having answers - potential calculation issue');
+        debugStore.set('zero_score_debug', {
+          state: prev,
+          result: result
+        });
+      }
+      
       return {
         ...prev,
         isCompleted: true,
@@ -162,7 +192,16 @@ export function useQuiz(examType: 'AZ-900' | 'AI-900', questionCount: number = 1
   };
 
   const checkAnswer = (question: Question, userAnswer: any): boolean => {
-    if (!userAnswer) {
+    // Enhanced logging for debugging
+    logger.log(`Checking answer for question ${question.id}:`, {
+      questionType: question.type,
+      userAnswer: userAnswer,
+      correctAnswer: question.correct_answer,
+      userAnswerType: typeof userAnswer,
+      correctAnswerType: typeof question.correct_answer
+    });
+    
+    if (!userAnswer && userAnswer !== 0 && userAnswer !== false) {
       logger.log(`No user answer for question ${question.id}`);
       return false;
     }
@@ -177,17 +216,28 @@ export function useQuiz(examType: 'AZ-900' | 'AI-900', questionCount: number = 1
         case 'drag-drop':
           // For drag-drop, compare arrays
           // Convert sparse user answer to compact array for comparison
-          const compactUserAnswer = Array.isArray(userAnswer) 
-            ? userAnswer.filter(item => item !== undefined && item !== null)
-            : [];
-          const correctAnswer = Array.isArray(question.correct_answer) 
-            ? question.correct_answer 
-            : [];
+          let compactUserAnswer;
+          if (Array.isArray(userAnswer)) {
+            compactUserAnswer = userAnswer.filter(item => item !== undefined && item !== null && item !== '');
+          } else {
+            logger.warn(`Invalid user answer format for drag-drop question ${question.id}:`, userAnswer);
+            return false;
+          }
+          
+          let correctAnswer;
+          if (Array.isArray(question.correct_answer)) {
+            correctAnswer = question.correct_answer;
+          } else {
+            logger.warn(`Invalid correct answer format for drag-drop question ${question.id}:`, question.correct_answer);
+            return false;
+          }
+          
           const dragDropResult = JSON.stringify(compactUserAnswer) === JSON.stringify(correctAnswer);
           logger.log(`Drag-drop ${question.id}:`, { 
             userAnswer: compactUserAnswer, 
             correct: correctAnswer, 
-            result: dragDropResult 
+            result: dragDropResult,
+            originalUserAnswer: userAnswer
           });
           return dragDropResult;
           
@@ -199,9 +249,16 @@ export function useQuiz(examType: 'AZ-900' | 'AI-900', questionCount: number = 1
           
         case 'true-false-table':
           // For true-false-table, compare the user answers with correct answers
-          const correctAnswers = typeof question.correct_answer === 'string' 
-            ? JSON.parse(question.correct_answer) 
-            : question.correct_answer;
+          let correctAnswers;
+          try {
+            correctAnswers = typeof question.correct_answer === 'string' 
+              ? JSON.parse(question.correct_answer) 
+              : question.correct_answer;
+          } catch (parseError) {
+            logger.error(`Error parsing correct answer for true-false-table question ${question.id}:`, parseError);
+            return false;
+          }
+          
           const tfResult = JSON.stringify(userAnswer) === JSON.stringify(correctAnswers);
           logger.log(`True-false-table ${question.id}:`, { 
             userAnswer, 
@@ -211,7 +268,7 @@ export function useQuiz(examType: 'AZ-900' | 'AI-900', questionCount: number = 1
           return tfResult;
           
         default:
-          logger.warn(`Unknown question type: ${question.type}`);
+          logger.warn(`Unknown question type: ${question.type} for question ${question.id}`);
           return false;
       }
     } catch (error) {

@@ -38,8 +38,25 @@ function App() {
 
   const handleAnswer = (answer: any) => {
     const currentQuestion = quizState.questions[quizState.currentQuestionIndex];
-    console.log('Handling answer for question:', currentQuestion.id, 'Answer:', answer);
+    console.log('[App] Handling answer for question:', {
+      questionId: currentQuestion.id,
+      questionType: currentQuestion.type,
+      answer: answer,
+      answerType: typeof answer,
+      currentIndex: quizState.currentQuestionIndex
+    });
+    
+    // Validate answer before storing
+    if (answer === undefined || answer === null) {
+      console.warn('[App] Warning: Received null/undefined answer for question', currentQuestion.id);
+    }
+    
     answerQuestion(currentQuestion.id, answer);
+    
+    // Log current state after answering
+    setTimeout(() => {
+      console.log('[App] Current answers after update:', quizState.answers);
+    }, 100);
   };
 
   const handleNext = () => {
