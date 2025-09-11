@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BookOpen, Play, Target, GraduationCap } from 'lucide-react';
+import { BookOpen, Play, Target, GraduationCap, AlignCenter } from 'lucide-react';
 import { QuestionStorage } from '../lib/storage';
 import { QuizConfig } from '../types/quiz';
 
@@ -69,9 +69,11 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
       <div className="max-w-2xl mx-auto">
         {/* Quiz Setup */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-2xl p-8 transition-all duration-300 border border-gray-200 dark:border-gray-700">
-          <h2 className="text-2xl font-semibold mb-6 flex items-center space-x-2 text-gray-800 dark:text-white transition-colors duration-300">
-            <Play className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-            <span>Start Quiz</span>
+          <h2 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-white transition-colors duration-300 text-center">
+            <div className="flex items-center justify-center space-x-2">
+              <Play className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              <span>Start Quiz</span>
+            </div>
           </h2>
           
           <div className="space-y-6">
