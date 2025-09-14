@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BookOpen, Play, Target, GraduationCap, AlignCenter } from 'lucide-react';
+import { BookOpen, Play, Target, GraduationCap, AlignCenter, Lock } from 'lucide-react';
 import { QuestionStorage } from '../lib/storage';
 import { QuizConfig } from '../types/quiz';
 
@@ -8,11 +8,24 @@ interface QuizSetupProps {
 }
 
 export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
-  const [mode, setMode] = useState<'practice' | 'examination'>('examination');
+  const [mode, setMode] = useState<'practice' | 'examination'>('practice'); // Default to practice mode
   const [examType, setExamType] = useState<'AZ-900' | 'AI-900'>('AZ-900');
   const [questionCount, setQuestionCount] = useState(10);
   const [difficulty, setDifficulty] = useState<'easy' | 'medium' | 'hard'>('easy');
   const [isLoading, setIsLoading] = useState(true);
+  const [lockMessage, setLockMessage] = useState<string>('');
+
+  // Lock configuration - define what's locked
+  const locks = {
+    examinationMode: true,
+    mediumDifficulty: true,
+    hardDifficulty: true
+  };
+
+  const showLockMessage = (message: string) => {
+    setLockMessage(message);
+    setTimeout(() => setLockMessage(''), 3000); // Clear message after 3 seconds
+  };
 
   useEffect(() => {
     const initializeQuestions = async () => {
@@ -51,7 +64,17 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-4xl mx-auto p-6 relative">
+      {/* Lock Message Toast */}
+      {lockMessage && (
+        <div className="fixed top-4 right-4 z-50 bg-orange-100 dark:bg-orange-900 border border-orange-300 dark:border-orange-700 text-orange-800 dark:text-orange-200 px-6 py-4 rounded-lg shadow-lg transition-all duration-300 animate-in slide-in-from-right">
+          <div className="flex items-center space-x-2">
+            <Lock className="w-5 h-5 flex-shrink-0" />
+            <span className="font-medium">{lockMessage}</span>
+          </div>
+        </div>
+      )}
+
       <div className="text-center mb-12">
         <div className="flex justify-center mb-6">
           <div className="w-20 h-20 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center transition-colors duration-300">
@@ -100,16 +123,27 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
                   </div>
                 </button>
                 <button
-                  onClick={() => setMode('examination')}
-                  className={`p-4 rounded-lg border-2 text-left transition-all duration-200 ${
-                    mode === 'examination'
+                  onClick={() => {
+                    if (locks.examinationMode) {
+                      showLockMessage('🔒 Examination Mode is locked. Complete Easy practice questions first!');
+                    } else {
+                      setMode('examination');
+                    }
+                  }}
+                  className={`p-4 rounded-lg border-2 text-left transition-all duration-200 relative ${
+                    locks.examinationMode
+                      ? 'border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-500 cursor-not-allowed'
+                      : mode === 'examination'
                       ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300'
                       : 'border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-500 text-gray-800 dark:text-gray-200'
                   }`}
                 >
                   <div className="flex items-center space-x-2 mb-2">
                     <GraduationCap className="w-5 h-5" />
-                    <div className="font-semibold">Examination Mode</div>
+                    <div className="font-semibold flex items-center space-x-2">
+                      <span>Examination Mode</span>
+                      {locks.examinationMode && <Lock className="w-4 h-4" />}
+                    </div>
                   </div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">
                     Mixed difficulty questions like real exam
@@ -174,27 +208,49 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
                     </div>
                   </button>
                   <button
-                    onClick={() => setDifficulty('medium')}
-                    className={`p-4 rounded-lg border-2 text-center transition-all duration-200 ${
-                      difficulty === 'medium'
+                    onClick={() => {
+                      if (locks.mediumDifficulty) {
+                        showLockMessage('🔒 Medium difficulty is locked. Master Easy questions first!');
+                      } else {
+                        setDifficulty('medium');
+                      }
+                    }}
+                    className={`p-4 rounded-lg border-2 text-center transition-all duration-200 relative ${
+                      locks.mediumDifficulty
+                        ? 'border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-500 cursor-not-allowed'
+                        : difficulty === 'medium'
                         ? 'border-yellow-500 bg-yellow-50 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300'
                         : 'border-gray-200 dark:border-gray-600 hover:border-yellow-300 dark:hover:border-yellow-500 text-gray-800 dark:text-gray-200'
                     }`}
                   >
-                    <div className="font-semibold">Medium</div>
+                    <div className="font-semibold flex items-center justify-center space-x-1">
+                      <span>Medium</span>
+                      {locks.mediumDifficulty && <Lock className="w-4 h-4" />}
+                    </div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">
                       Intermediate
                     </div>
                   </button>
                   <button
-                    onClick={() => setDifficulty('hard')}
-                    className={`p-4 rounded-lg border-2 text-center transition-all duration-200 ${
-                      difficulty === 'hard'
+                    onClick={() => {
+                      if (locks.hardDifficulty) {
+                        showLockMessage('🔒 Hard difficulty is locked. Complete Medium questions first!');
+                      } else {
+                        setDifficulty('hard');
+                      }
+                    }}
+                    className={`p-4 rounded-lg border-2 text-center transition-all duration-200 relative ${
+                      locks.hardDifficulty
+                        ? 'border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-500 cursor-not-allowed'
+                        : difficulty === 'hard'
                         ? 'border-red-500 bg-red-50 dark:bg-red-900/30 text-red-800 dark:text-red-300'
                         : 'border-gray-200 dark:border-gray-600 hover:border-red-300 dark:hover:border-red-500 text-gray-800 dark:text-gray-200'
                     }`}
                   >
-                    <div className="font-semibold">Hard</div>
+                    <div className="font-semibold flex items-center justify-center space-x-1">
+                      <span>Hard</span>
+                      {locks.hardDifficulty && <Lock className="w-4 h-4" />}
+                    </div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">
                       Advanced
                     </div>
@@ -222,8 +278,11 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
 
             <button
               onClick={handleStartQuiz}
+              disabled={mode === 'examination' && locks.examinationMode}
               className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center justify-center space-x-2 ${
-                mode === 'practice'
+                mode === 'examination' && locks.examinationMode
+                  ? 'bg-gray-400 dark:bg-gray-600 text-gray-200 cursor-not-allowed'
+                  : mode === 'practice'
                   ? 'bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 dark:from-green-500 dark:to-emerald-500 dark:hover:from-green-600 dark:hover:to-emerald-600'
                   : 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 dark:from-purple-500 dark:to-indigo-500 dark:hover:from-purple-600 dark:hover:to-indigo-600'
               } text-white`}
