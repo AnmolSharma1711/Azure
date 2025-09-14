@@ -120,7 +120,7 @@ export const dragDropQuestions: Question[] = [
       'Monitor performance'
     ],
     explanation: 'Computer vision implementation requires careful planning and systematic execution.',
-    category: 'Computer Vision',
+  category: 'Computer Vision Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -145,7 +145,7 @@ export const dragDropQuestions: Question[] = [
       'Result interpretation'
     ],
     explanation: 'NLP processing follows a structured pipeline from raw text to meaningful insights.',
-    category: 'Natural Language Processing',
+  category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -170,7 +170,7 @@ export const dragDropQuestions: Question[] = [
       'Monitor model behavior'
     ],
     explanation: 'Responsible AI requires proactive planning and continuous monitoring.',
-    category: 'Responsible AI',
+  category: 'AI Workloads and Considerations',
     difficulty: 'hard',
     exam_type: 'AI-900'
   },

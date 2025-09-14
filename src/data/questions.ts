@@ -77,7 +77,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'D',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Computer Vision Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -93,7 +93,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -221,7 +221,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'C',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Computer Vision Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -237,7 +237,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -253,7 +253,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'C',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Machine Learning Fundamentals',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -285,7 +285,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Conversational AI Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -301,7 +301,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'AI Workloads and Considerations',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -493,7 +493,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -653,7 +653,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -717,7 +717,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Machine Learning Fundamentals',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -749,7 +749,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Machine Learning Fundamentals',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -765,7 +765,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'C',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Conversational AI Workloads',
     difficulty: 'easy',
     exam_type: 'AI-900'
   },
@@ -845,7 +845,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -941,7 +941,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1245,7 +1245,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Computer Vision Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1261,7 +1261,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'A',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Computer Vision Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -1277,7 +1277,7 @@ export const predefinedQuestions: Question[] = [
     ],
     correct_answer: 'B',
     explanation: '',
-    category: 'AI Fundamentals',
+    category: 'Natural Language Processing Workloads',
     difficulty: 'medium',
     exam_type: 'AI-900'
   },
@@ -2405,6 +2405,8 @@ export const predefinedQuestions: Question[] = [
     exam_type: 'AZ-900'
   }
 ];
+
+
 
 
 
