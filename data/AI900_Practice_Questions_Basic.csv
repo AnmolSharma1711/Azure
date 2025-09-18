@@ -1,0 +1,51 @@
+S.No.,Question,Option A,Option B,Option C,Option D,Correct Answer
+1,Which of the following best defines Artificial Intelligence (AI)?,A. A software that automates hardware installation,B. A system that mimics human intelligence to solve problems,C. A database for storing large datasets,D. A tool to increase internet speed,B
+2,Which AI workload involves predicting future outcomes based on historical data?,A. Computer Vision,B. Natural Language Processing,C. Machine Learning,D. Knowledge Mining,C
+3,Which scenario is an example of Natural Language Processing (NLP)?,A. Detecting objects in an image,B. Translating a sentence from English to Spanish,C. Predicting stock prices,D. Recognizing a person’s face,B
+4,Which of the following is NOT an example of Computer Vision?,A. Optical Character Recognition (OCR),B. Image classification,C. Speech-to-text conversion,D. Face detection,C
+5,Which Azure service is designed to analyze large amounts of unstructured text?,A. Azure Machine Learning,B. Azure Cognitive Search,C. Azure Bot Service,D. Azure Cognitive Services - Text Analytics,D
+6,Which service provides prebuilt AI models that can be used without extensive coding?,A. Azure Virtual Machines,B. Azure Cognitive Services,C. Azure Synapse Analytics,D. Azure Data Factory,B
+7,"Which Azure service is used to build, train, and deploy machine learning models?",A. Azure Machine Learning,B. Azure Data Lake,C. Azure Cognitive Search,D. Azure Key Vault,A
+8,Which service enables developers to create conversational AI agents?,A. Azure Bot Service,B. Azure Virtual Network,C. Azure Machine Learning,D. Azure SQL Database,A
+9,Which Cognitive Service would you use to detect the sentiment of a customer review?,A. Translator Text API,B. Computer Vision API,C. Text Analytics API,D. QnA Maker,C
+10,Which service is used for image classification and object detection without writing code?,A. Custom Vision,B. Translator Service,C. Azure Data Factory,D. Azure Synapse,A
+11,"In Machine Learning, what is a label?",A. Input data provided to the model,B. The output the model is trying to predict,C. A description of dataset features,D. The training algorithm used,B
+12,Which type of ML is used when labeled training data is available?,A. Supervised Learning,B. Unsupervised Learning,C. Reinforcement Learning,D. Deep Learning,A
+13,Which type of ML groups data based on similarities without predefined labels?,A. Supervised Learning,B. Reinforcement Learning,C. Unsupervised Learning,D. Regression,C
+14,Predicting house prices based on size and location is an example of:,A. Classification,B. Clustering,C. Regression,D. Translation,C
+15,Identifying whether an email is spam or not spam is an example of:,A. Regression,B. Classification,C. Clustering,D. Reinforcement Learning,B
+16,Which Cognitive Service is used for extracting text from images?,A. Custom Vision,B. Translator Text,C. Computer Vision OCR,D. QnA Maker,C
+17,A self-driving car identifying pedestrians on the road uses which AI workload?,A. Speech Recognition,B. Computer Vision,C. Knowledge Mining,D. Reinforcement Learning,B
+18,Which service allows training a custom object detection model?,A. Azure Machine Learning Designer,B. Custom Vision,C. Text Analytics,D. Azure Bot Service,B
+19,Face verification (checking if two images are of the same person) uses:,A. Face API,B. Custom Vision,C. QnA Maker,D. Translator API,A
+20,An application that reads a scanned invoice and extracts text uses:,A. Speech Services,B. Translator Service,C. Form Recognizer,D. LUIS,C
+21,Which service provides real-time speech-to-text conversion?,A. Text Analytics,B. Translator Text,C. Speech Service,D. Form Recognizer,C
+22,Which NLP service is best for creating a language-understanding model for a chatbot?,A. Translator Service,B. LUIS (Language Understanding),C. Computer Vision API,D. Azure ML Designer,B
+23,Which service detects the key phrases in a customer feedback comment?,A. Computer Vision API,B. Text Analytics API,C. Form Recognizer,D. Custom Vision,B
+24,Which service translates text from one language to another?,A. Azure Bot Service,B. Translator Text API,C. Face API,D. Speech Service,B
+25,A virtual assistant that answers FAQs using predefined documents can be built using:,A. Azure Bot Service + QnA Maker,B. Custom Vision,C. Computer Vision OCR,D. Azure Machine Learning,A
+26,Which of the following is a principle of Responsible AI?,A. Bias and fairness,B. Overfitting and underfitting,C. High availability,D. Cost efficiency,A
+27,Which practice ensures AI models make consistent and reliable predictions?,A. Transparency,B. Reliability and Safety,C. Accountability,D. Interpretability,B
+28,Avoiding gender or race bias in AI hiring tools relates to which Responsible AI principle?,A. Privacy,B. Fairness,C. Transparency,D. Reliability,B
+29,Protecting personal data when building AI solutions ensures:,A. Fairness,B. Reliability,C. Privacy and Security,D. Accountability,C
+30,Which Microsoft framework provides guidelines for building Responsible AI solutions?,A. AI Trust Framework,B. Responsible AI Standard,C. Azure AI Fairness Guide,D. Cognitive AI Guidelines,B
+31,Which service enables extracting structured information from unstructured data sources?,A. Azure Cognitive Search,B. Custom Vision,C. Text Analytics,D. Translator API,A
+32,Which AI workload powers an enterprise search engine over company documents?,A. Computer Vision,B. Knowledge Mining,C. Natural Language Processing,D. Reinforcement Learning,B
+33,Azure Cognitive Search can integrate with which Cognitive Service to enrich documents?,A. Face API,B. Text Analytics,C. Speech Services,D. All of the above,D
+34,Which scenario best fits Knowledge Mining?,A. Predicting future sales,B. Summarizing thousands of legal contracts,C. Translating text between languages,D. Detecting fraud in bank transactions,B
+35,Knowledge Mining typically uses:,A. Data lakes and warehouses,"B. Indexers, Cognitive Skills, and Search indexes",C. Neural networks,D. Regression models,B
+36,Azure ML Designer is:,A. A drag-and-drop interface for building ML models,B. A tool for editing Python notebooks,C. A data storage service,D. A chatbot framework,A
+37,Which environment supports Jupyter notebooks for ML experiments in Azure?,A. Azure Synapse,B. Azure Databricks,C. Azure Machine Learning Studio,D. Azure SQL,C
+38,Which service helps monitor and manage deployed ML models in production?,A. Azure Monitor,B. Azure Cognitive Search,C. Azure ML MLOps,D. QnA Maker,C
+39,Which environment is best suited for developers coding ML models from scratch?,A. Azure Notebooks,B. Azure ML SDK (Python/R),C. Power BI,D. Azure Key Vault,B
+40,Which deployment option allows real-time ML model predictions?,A. Batch inference,B. REST API endpoint,C. Data Pipeline,D. Synapse SQL Pool,B
+41,Predicting customer churn is an example of:,A. Classification,B. Clustering,C. Regression,D. Computer Vision,A
+42,Grouping customers by buying patterns is an example of:,A. Regression,B. Clustering,C. NLP,D. Forecasting,B
+43,Forecasting next month’s electricity demand is an example of:,A. Regression,B. Classification,C. Computer Vision,D. Translation,A
+44,Detecting fraudulent credit card transactions is an example of:,A. NLP,B. Clustering,C. Anomaly Detection,D. Computer Vision,C
+45,Reading handwritten notes from an image is an example of:,A. Speech Service,B. Computer Vision OCR,C. Translator API,D. LUIS,B
+46,Which Azure service allows automated ML model selection and tuning?,A. Azure AutoML,B. Azure Bot Service,C. Cognitive Search,D. Translator Text,A
+47,Which AI service would you combine with Power BI for AI-driven insights?,A. Azure Synapse Analytics,B. Azure Cognitive Services,C. Azure Data Lake,D. Azure Key Vault,B
+48,Which AI technique rewards an agent for taking correct actions?,A. Supervised Learning,B. Unsupervised Learning,C. Reinforcement Learning,D. Deep Learning,C
+49,Which Azure service would be best for a company wanting to process voice commands in their app?,A. Speech Service,B. Text Analytics,C. Translator API,D. Custom Vision,A
+50,Which AI concept ensures models provide explanations for their predictions?,A. Reliability,B. Interpretability,C. Fairness,D. Transparency,B
